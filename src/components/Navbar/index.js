@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Toolbar } from '@mui/material';
+import { Drawer, List, ListItem, ListItemText, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import CategoryIcon from '@mui/icons-material/Category';
 import { toggleNavbar } from './navbarReducer';
+import './index.css'
 
 const SideNavbar = () => {
   const dispatch = useDispatch();
@@ -17,51 +15,50 @@ const SideNavbar = () => {
   };
 
   return (
-    <>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Toolbar>
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={navbarOpen}
-        onClose={handleDrawerToggle}
-      >
+      <>
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="close drawer"
-            edge="end"
-            onClick={handleDrawerToggle}
-            sx={{ ml: 'auto' }}
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
           >
-            <CloseIcon />
+            <MenuIcon />
           </IconButton>
         </Toolbar>
-        <List>
-          <ListItem  onClick={handleDrawerToggle}>
-            <ListItemIcon><RestaurantMenuIcon /></ListItemIcon>
-            <ListItemText primary="Menu" />
-          </ListItem>
-          <ListItem  onClick={handleDrawerToggle}>
-            <ListItemIcon><FastfoodIcon /></ListItemIcon>
-            <ListItemText primary="Food" />
-          </ListItem>
-          <ListItem  onClick={handleDrawerToggle}>
-            <ListItemIcon><CategoryIcon /></ListItemIcon>
-            <ListItemText primary="Categories" />
-          </ListItem>
-        </List>
-      </Drawer>
-    </>
+        <Drawer
+            variant="persistent"
+            color="danger"
+            anchor="left"
+            open={navbarOpen}
+            onClose={handleDrawerToggle}
+            sx={{
+              width: 240,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: 240,
+                boxSizing: 'border-box',
+              },
+            }}
+        >
+          <Toolbar />
+          <List>
+            <ListItem className="list-item">
+              <ListItemText primary="Active" />
+            </ListItem>
+            <ListItem className="list-item">
+              <ListItemText primary="Completed" />
+            </ListItem>
+            <ListItem className="list-item">
+              <ListItemText primary="Account" />
+            </ListItem>
+            <ListItem className="list-item">
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </List>
+        </Drawer>
+      </>
   );
 }
 
